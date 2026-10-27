@@ -1,0 +1,98 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "cursorplugins",
+    "nameCn": "Cursor Plugins",
+    "repoName": "cursor-plugins-deploy-guide",
+    "oneLiner": "14.2k stars，MIT，Cursor 维护的插件市场仓库，内含 60+ 个官方与第三方插件",
+    "officialRepo": "https://github.com/cursor/plugins",
+    "officialDocs": "https://github.com/cursor/plugins#cursor-plugins",
+    "stars": "14.2k",
+    "license": "MIT",
+    "highlights": [
+      "14.2k stars：Cursor 维护，插件质量有基本保证",
+      "60+ 插件：开发工具、生产力、SaaS 集成三大类",
+      "结构统一：每个插件都有 manifest，便于脚本化安装",
+      "含 MCP 定义：第三方服务插件自带 mcp.json",
+      "MIT：可以直接改、内部复用",
+      "持续更新：新插件跟进主流 SaaS"
+    ],
+    "mcpSupport": "部分插件目录内自带 `mcp.json`，由 Cursor 在启用插件时读取；本仓库不注册 MCP。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-27",
+    "verification": [
+      [
+        "仓库元数据已核对：14.2k stars、MIT、2026-01 建仓",
+        "已核对 2026-10-27"
+      ],
+      [
+        "README 确认插件根目录结构与 marketplace.json 机制",
+        "已核对 2026-10-27"
+      ],
+      [
+        "未实测 Cursor 内加载效果",
+        "说明 2026-10-27"
+      ]
+    ],
+    "deploy": {
+      "type": "script",
+      "steps": [
+        "git clone --depth 1 https://github.com/cursor/plugins.git cursor-plugins-src",
+        "mkdir -p \"$HOME/.cursor/plugins\" ; for p in thermos teaching advisor orchestrate; do cp -r \"cursor-plugins-src/$p\" \"$HOME/.cursor/plugins/\" ; done",
+        "ls \"$HOME/.cursor/plugins\""
+      ],
+      "stepsPs": [
+        "git clone --depth 1 https://github.com/cursor/plugins.git cursor-plugins-src",
+        "$dst = Join-Path $env:USERPROFILE '.cursor\\plugins' ; New-Item -ItemType Directory -Force -Path $dst | Out-Null ; foreach ($p in @('thermos','teaching','advisor','orchestrate')) { Copy-Item -Recurse -Force (Join-Path 'cursor-plugins-src' $p) $dst }",
+        "Get-ChildItem $dst | Select-Object -ExpandProperty Name"
+      ],
+      "source": "https://github.com/cursor/plugins"
+    },
+    "pitfalls": [
+      "复制后不显示：确认目录结构是 `<name>/.cursor-plugin/plugin.json`",
+      "复制到项目里只对该项目生效：全局要放 `~/.cursor/plugins`",
+      "插件不生效：重启 Cursor",
+      "OAuth 反复失败：先退出对应账号再重新授权",
+      "更新插件：删掉旧目录重新 `git pull` 再复制",
+      "慎装高权限插件：会读邮件、日历、代码库"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/cursor-plugins-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/cursor-plugins-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "Cursor Plugins 部署",
+    "Cursor 插件 安装",
+    "Cursor 插件市场",
+    "Cursor Agent 扩展",
+    "Cursor thermos 插件",
+    "Cursor MCP 插件",
+    "Cursor 开发效率",
+    "Cursor 插件 合集",
+    "cursor plugins 教程",
+    "Cursor 官方插件"
+  ],
+  "topics": [
+    "cursor",
+    "plugins",
+    "ai-agents",
+    "mcp",
+    "developer-tools",
+    "ide"
+  ]
+}
